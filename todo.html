@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+         body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #edd6b0;
+        }
+        .con {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .con1 {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: -200px;
+        }
+
+        #t1 {
+            padding: 8px;
+            margin-right: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        #add, #update {
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            margin-top: 8px;
+            transition: background-color 0.3s;
+        }
+
+        #add:hover, #update:hover {
+            background-color: #45a049;
+        }
+
+        #update {
+            display: none;
+        }
+
+        #con {
+            margin-top: 10px;
+        }
+
+        #con li {
+            list-style-type: disc;
+            margin-bottom: 5px;
+        }
+
+        #con li button {
+            margin-left: 5px;
+        }
+        h1 {
+            color: #333;
+        }
+</style>
+    <title>TODO List</title>
+</head>
+<body>
+    <div class="con">
+
+    <div class="con1">
+    <h1>Todo-list</h1>
+    <input type="text" id="t1"/>
+    <button onclick="add()" id="add">add</button>
+    <button onclick="update()" style="display: none;" id="update">update</button>
+    <div id="con"></div>
+    </div>
+    </div>
+
+    <script>
+        let a=[]
+        let i=0
+        let ind 
+        let tfr=document.getElementById("t1")
+        let conr=document.getElementById("con")
+        let abtn=document.getElementById("add")
+        let ubtn=document.getElementById("update")
+
+        let add=()=>{
+            a[i]=tfr.value 
+            tfr.value=""
+            i++
+            disp()
+        }
+        let disp=()=>{
+            conr.innerHTML=""
+            for(let j=0;j<i;j++){
+                let newel=document.createElement("li")
+                newel.innerHTML=`${a[j]}<button onclick="edit(${j})">edit</button>
+                <button onclick="del(${j})">delete</button>`
+                conr.appendChild(newel)
+            }
+        }
+
+        let edit=(x)=>{
+            tfr.value=a[x]
+            abtn.style.display="none"
+            ubtn.style.display="inline-block"
+            ind=x
+        }
+        let update=()=>{
+            a[ind]=tfr.value
+            abtn.style.display="inline-block"
+            ubtn.style.display="none"
+            tfr.value=""
+            disp()
+        }
+        let del=(x)=>{
+            a.splice(x,1)
+            i--;
+            disp()
+        }
+
+
+    </script>
+</body>
+</html>
